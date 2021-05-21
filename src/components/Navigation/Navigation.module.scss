@@ -1,0 +1,17 @@
+.nav_link {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  color: black;
+  &:not(:last-child) {
+    margin-right: 15px;
+  }
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+.nav_linkActive {
+  color: rgb(45, 102, 18);
+}
