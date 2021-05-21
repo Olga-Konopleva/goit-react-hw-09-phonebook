@@ -1,5 +1,4 @@
-import { Component } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../../redux/auth/auth-operations';
 import { getEmail } from '../../../redux/auth/auth-selectors';
 import styles from './UserMenu.module.scss';
@@ -23,27 +22,19 @@ const Button = styled.button`
   }
 `;
 
-class UserMenu extends Component {
-  render() {
-    const { email, onLogout } = this.props;
+const UserMenu = () => {
+  const email = useSelector(getEmail);
+  const dispatch = useDispatch();
+  const onLogout = () => dispatch(logOut());
 
-    return (
-      <div className={styles.userMenu}>
-        <p className={styles.user}>{email}</p>
-        <Button type="button" onClick={onLogout}>
-          Выйти
-        </Button>{' '}
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = state => ({
-  email: getEmail(state),
-});
-
-const mapDispatchToProps = {
-  onLogout: logOut,
+  return (
+    <div className={styles.userMenu}>
+      <p className={styles.user}>{email}</p>
+      <Button type="button" onClick={onLogout}>
+        Выйти
+      </Button>
+    </div>
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);
+export default UserMenu;

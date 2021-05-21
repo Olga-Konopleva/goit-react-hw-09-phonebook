@@ -1,60 +1,115 @@
-import { React, Component } from 'react';
-import { connect } from 'react-redux';
+import { React, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { logIn } from '../redux/auth/auth-operations';
 import styles from './LoginView.module.scss';
 import styled from 'styled-components';
 
-class LoginView extends Component {
-  state = {
-    email: '',
-    password: '',
-  };
+const LoginView = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  handleSubmit = e => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.onLogin(this.state);
-    this.setState({ email: '', password: '' });
+    dispatch(logIn({ email, password }));
+    setEmail('');
+    setPassword('');
   };
 
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      default:
+        return;
+    }
   };
 
-  render() {
-    const { email, password } = this.state;
-    return (
-      <div className={styles.container}>
-        <form onSubmit={this.handleSubmit} className={styles.form}>
-          <label className={styles.label}>
-            <span>Почта</span>
-            <input
-              type="email"
-              value={email}
-              name="email"
-              onChange={this.handleChange}
-            />
-          </label>
-          <label className={styles.label}>
-            <span>Пароль</span>
-            <input
-              type="password"
-              value={password}
-              name="password"
-              onChange={this.handleChange}
-            />
-          </label>
-          <Button type="submit">Войти</Button>
-        </form>
-      </div>
-    );
-  }
-}
-
-const mapDispatchToProps = {
-  onLogin: logIn,
+  return (
+    <div className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <label className={styles.label}>
+          <span>Почта</span>
+          <input
+            type="email"
+            value={email}
+            name="email"
+            onChange={handleChange}
+          />
+        </label>
+        <label className={styles.label}>
+          <span>Пароль</span>
+          <input
+            type="password"
+            value={password}
+            name="password"
+            onChange={handleChange}
+          />
+        </label>
+        <Button type="submit">Войти</Button>
+      </form>
+    </div>
+  );
 };
 
-export default connect(null, mapDispatchToProps)(LoginView);
+export default LoginView;
+
+// class LoginView extends Component {
+//   state = {
+//     email: '',
+//     password: '',
+//   };
+
+//   handleSubmit = e => {
+//     e.preventDefault();
+//     this.props.onLogin(this.state);
+//     this.setState({ email: '', password: '' });
+//   };
+
+//   handleChange = ({ target: { name, value } }) => {
+//     this.setState({ [name]: value });
+//   };
+
+//   render() {
+//     const { email, password } = this.state;
+//     return (
+//       <div className={styles.container}>
+//         <form onSubmit={this.handleSubmit} className={styles.form}>
+//           <label className={styles.label}>
+//             <span>Почта</span>
+//             <input
+//               type="email"
+//               value={email}
+//               name="email"
+//               onChange={this.handleChange}
+//             />
+//           </label>
+//           <label className={styles.label}>
+//             <span>Пароль</span>
+//             <input
+//               type="password"
+//               value={password}
+//               name="password"
+//               onChange={this.handleChange}
+//             />
+//           </label>
+//           <Button type="submit">Войти</Button>
+//         </form>
+//       </div>
+//     );
+//   }
+// }
+
+// const mapDispatchToProps = {
+//   onLogin: logIn,
+// };
+
+// export default connect(null, mapDispatchToProps)(LoginView);
 
 const Button = styled.button`
   background: transparent;

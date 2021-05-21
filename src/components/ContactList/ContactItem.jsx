@@ -21,9 +21,6 @@ const Li = styled.li`
   margin-bottom: 10px;
 `;
 
-// const getContactsById = id => state =>
-//   state.contacts.items.find(contact => contact.id === id);
-
 const ContactItem = ({ id }) => {
   const { name, number } = useSelector(contactsSelectors.getContactById(id));
   const dispatch = useDispatch();

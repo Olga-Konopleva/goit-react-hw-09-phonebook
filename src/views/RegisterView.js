@@ -1,69 +1,132 @@
-import { Component } from 'react';
-import { connect } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { register } from '../redux/auth/auth-operations';
 import styled from 'styled-components';
 import styles from './LoginView.module.scss';
 
-class RegisterView extends Component {
-  state = {
-    name: '',
-    email: '',
-    password: '',
-  };
+const RegisterView = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.onRegister(this.state);
-    this.setState({ name: '', email: '', password: '' });
+    dispatch(register({ name, email, password }));
+    setName('');
+    setEmail('');
+    setPassword('');
   };
 
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      default:
+        return;
+    }
   };
-  render() {
-    const { name, email, password } = this.state;
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit} className={styles.form}>
-          <label className={styles.label}>
-            <span>Имя</span>
-            <input
-              type="text"
-              value={name}
-              name="name"
-              onChange={this.handleChange}
-            />
-          </label>
-          <label className={styles.label}>
-            <span>Почта</span>
-            <input
-              type="email"
-              value={email}
-              name="email"
-              onChange={this.handleChange}
-            />
-          </label>
-          <label className={styles.label}>
-            <span>Пароль</span>
-            <input
-              type="password"
-              value={password}
-              name="password"
-              onChange={this.handleChange}
-            />
-          </label>
-          <Button type="submit">Зарегистрироваться</Button>
-        </form>
-      </div>
-    );
-  }
-}
 
-const mapDispatchToProps = {
-  onRegister: register,
+  return (
+    <div>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <label className={styles.label}>
+          <span>Имя</span>
+          <input type="text" value={name} name="name" onChange={handleChange} />
+        </label>
+        <label className={styles.label}>
+          <span>Почта</span>
+          <input
+            type="email"
+            value={email}
+            name="email"
+            onChange={handleChange}
+          />
+        </label>
+        <label className={styles.label}>
+          <span>Пароль</span>
+          <input
+            type="password"
+            value={password}
+            name="password"
+            onChange={handleChange}
+          />
+        </label>
+        <Button type="submit">Зарегистрироваться</Button>
+      </form>
+    </div>
+  );
 };
 
-export default connect(null, mapDispatchToProps)(RegisterView);
+export default RegisterView;
+
+// class RegisterView extends Component {
+//   state = {
+//     name: '',
+//     email: '',
+//     password: '',
+//   };
+
+//   handleSubmit = e => {
+//     e.preventDefault();
+//     this.props.onRegister(this.state);
+//     this.setState({ name: '', email: '', password: '' });
+//   };
+
+//   handleChange = ({ target: { name, value } }) => {
+//     this.setState({ [name]: value });
+//   };
+//   render() {
+//     const { name, email, password } = this.state;
+//     return (
+//       <div>
+//         <form onSubmit={this.handleSubmit} className={styles.form}>
+//           <label className={styles.label}>
+//             <span>Имя</span>
+//             <input
+//               type="text"
+//               value={name}
+//               name="name"
+//               onChange={this.handleChange}
+//             />
+//           </label>
+//           <label className={styles.label}>
+//             <span>Почта</span>
+//             <input
+//               type="email"
+//               value={email}
+//               name="email"
+//               onChange={this.handleChange}
+//             />
+//           </label>
+//           <label className={styles.label}>
+//             <span>Пароль</span>
+//             <input
+//               type="password"
+//               value={password}
+//               name="password"
+//               onChange={this.handleChange}
+//             />
+//           </label>
+//           <Button type="submit">Зарегистрироваться</Button>
+//         </form>
+//       </div>
+//     );
+//   }
+// }
+
+// const mapDispatchToProps = {
+//   onRegister: register,
+// };
+
+// export default connect(null, mapDispatchToProps)(RegisterView);
 
 const Button = styled.button`
   background: transparent;

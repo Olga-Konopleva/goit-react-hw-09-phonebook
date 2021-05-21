@@ -1,31 +1,52 @@
-import { React, Component } from 'react';
-import { connect } from 'react-redux';
+import { React, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ContactList from '../components/ContactList/ContactList';
 import Filter from '../components/Filter/Filter';
 import { fetchContacts } from '../redux/contacts/contacts-operations';
 
-class ContactsView extends Component {
-  componentDidMount() {
-    this.props.fetchContacts();
-  }
+const ContactsView = () => {
+  const dispatch = useDispatch();
 
-  render() {
-    return (
-      <div className="App">
-        <h1>Phonebook</h1>
-        <ContactForm />
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, []);
 
-        <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <h1>Phonebook</h1>
+      <ContactForm />
 
-const mapDispatchToProps = dispatch => ({
-  fetchContacts: () => dispatch(fetchContacts()),
-});
+      <h2>Contacts</h2>
+      <Filter />
+      <ContactList />
+    </div>
+  );
+};
 
-export default connect(null, mapDispatchToProps)(ContactsView);
+export default ContactsView;
+
+// class ContactsView extends Component {
+//   componentDidMount() {
+//     this.props.fetchContacts();
+//   }
+
+//   render() {
+//     return (
+//       <div className="App">
+//         <h1>Phonebook</h1>
+//         <ContactForm />
+
+//         <h2>Contacts</h2>
+//         <Filter />
+//         <ContactList />
+//       </div>
+//     );
+//   }
+// }
+
+// const mapDispatchToProps = dispatch => ({
+//   fetchContacts: () => dispatch(fetchContacts()),
+// });
+
+// export default connect(null, mapDispatchToProps)(ContactsView);

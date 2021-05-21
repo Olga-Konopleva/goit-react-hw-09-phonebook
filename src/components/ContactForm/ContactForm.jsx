@@ -29,15 +29,11 @@ const Label = styled.label`
   margin-bottom: 15px;
 `;
 
-// const getContacts = state => state.contacts.items;
-
 const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(contactsSelectors.getAllContacts);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
-  console.log(contacts);
 
   const handleSubmit = e => {
     e.preventDefault();
