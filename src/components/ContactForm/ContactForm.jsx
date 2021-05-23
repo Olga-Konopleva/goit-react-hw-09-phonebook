@@ -14,7 +14,7 @@ const Button = styled.button`
   border: 2px solid green;
   color: green;
   width: 200px;
-  margin-left: 1em;
+  margin: 0 auto;
   padding: 0.25em 1em;
   &:hover {
     background: LemonChiffon;
@@ -53,7 +53,7 @@ const ContactForm = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <Label>
-        <Span>Name</Span>
+        <Span>Имя</Span>
         <input
           type="text"
           name="name"
@@ -65,7 +65,7 @@ const ContactForm = () => {
         />
       </Label>
       <Label>
-        <Span>Number</Span>
+        <Span>Номер</Span>
         <input
           type="tel"
           name="number"
@@ -76,7 +76,7 @@ const ContactForm = () => {
           onChange={handleChangeNumber}
         />
       </Label>
-      <Button type="submit">Add contact</Button>
+      <Button type="submit">Добавить контакт</Button>
     </Form>
   );
 };

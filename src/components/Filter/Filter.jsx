@@ -7,7 +7,7 @@ const Filter = () => {
 
   return (
     <div>
-      <p>Find contacts by name</p>
+      <p>Найти контакт по имени</p>
       <input type="text" onChange={handleChangeFilter} />
     </div>
   );

@@ -2,6 +2,7 @@ import { Component, lazy, Suspense } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import AppBar from './components/AppBar/AppBar';
+import Loader from './components/Loader/Loader';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { getCurrentUser } from './redux/auth/auth-operations';
@@ -31,7 +32,7 @@ class App extends Component {
     return (
       <div>
         <AppBar />
-        <Suspense fallback={<p>Загружаем...</p>}>
+        <Suspense fallback={<Loader />}>
           <Switch>
             <Route exact path="/" component={HomeView} />
             <PrivateRoute path="/contacts" component={ContactsView} />

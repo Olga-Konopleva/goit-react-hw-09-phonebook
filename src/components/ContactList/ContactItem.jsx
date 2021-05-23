@@ -29,7 +29,7 @@ const ContactItem = ({ id }) => {
     <Li>
       {name}: {number}
       <Button type="button" onClick={handleDelete}>
-        Delete
+        Удалить
       </Button>
     </Li>
   );
