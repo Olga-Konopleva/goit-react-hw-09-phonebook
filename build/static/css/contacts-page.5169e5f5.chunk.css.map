@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/views/HomeView.module.scss"],"names":[],"mappings":"AAAA,2BACE,aAAA,CACA,iBAAA,CAGF,sBACE,aAAA,CAGF,4BACE,aAAA","file":"contacts-page.5169e5f5.chunk.css","sourcesContent":[".container {\n  margin: 0 auto;\n  text-align: center;\n}\n\n.logo {\n  color: darkblue;\n}\n\n.logoAccent {\n  color: rgb(92, 164, 182);\n}\n"]}
