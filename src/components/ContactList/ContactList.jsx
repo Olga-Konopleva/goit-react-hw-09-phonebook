@@ -11,11 +11,14 @@ const Ul = styled.ul`
 const ContactList = () => {
   const contacts = useSelector(contactsSelectors.getFilterContacts);
   return (
-    <Ul>
-      {contacts.map(({ id }) => (
-        <ContactItem key={id} id={id} />
-      ))}
-    </Ul>
+    <>
+      {!!contacts.length && <h2>Контакты</h2>}
+      <Ul>
+        {contacts.map(({ id }) => (
+          <ContactItem key={id} id={id} />
+        ))}
+      </Ul>
+    </>
   );
 };
 

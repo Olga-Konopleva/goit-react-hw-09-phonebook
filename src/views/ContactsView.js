@@ -29,8 +29,6 @@ const ContactsView = () => {
       </h1>
       <ContactForm />
 
-      <h2>Контакты</h2>
-
       {isFilterShow && <Filter />}
 
       {isLoading ? <Loader /> : <ContactList />}
