@@ -5,47 +5,46 @@ import styled from 'styled-components';
 import styles from './LoginView.module.scss';
 
 const RegisterView = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const resetState = () => ({
+    name: '',
+    email: '',
+    password: '',
+  });
+
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(register({ name, email, password }));
-    setName('');
-    setEmail('');
-    setPassword('');
+    dispatch(register(user));
+    resetState();
   };
 
-  const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'email':
-        setEmail(value);
-        break;
-      case 'password':
-        setPassword(value);
-        break;
-      default:
-        return;
-    }
-  };
+  const handleChange = ({ target: { name, value } }) =>
+    setUser(prev => ({ ...prev, [name]: value }));
 
   return (
     <div>
       <form onSubmit={handleSubmit} className={styles.form}>
         <label className={styles.label}>
           <span>Имя</span>
-          <input type="text" value={name} name="name" onChange={handleChange} />
+          <input
+            type="text"
+            value={user.name}
+            name="name"
+            onChange={handleChange}
+          />
         </label>
         <label className={styles.label}>
           <span>Почта</span>
           <input
             type="email"
-            value={email}
+            value={user.email}
             name="email"
             onChange={handleChange}
           />
@@ -54,7 +53,7 @@ const RegisterView = () => {
           <span>Пароль</span>
           <input
             type="password"
-            value={password}
+            value={user.password}
             name="password"
             onChange={handleChange}
           />

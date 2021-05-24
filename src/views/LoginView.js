@@ -5,30 +5,26 @@ import styles from './LoginView.module.scss';
 import styled from 'styled-components';
 
 const LoginView = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
+
+  const resetState = () => ({
+    email: '',
+    password: '',
+  });
 
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(logIn({ email, password }));
-    setEmail('');
-    setPassword('');
+    dispatch(logIn(user));
+    resetState();
   };
 
-  const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case 'email':
-        setEmail(value);
-        break;
-      case 'password':
-        setPassword(value);
-        break;
-      default:
-        return;
-    }
-  };
+  const handleChange = ({ target: { name, value } }) =>
+    setUser(prev => ({ ...prev, [name]: value }));
 
   return (
     <div className={styles.container}>
@@ -37,7 +33,7 @@ const LoginView = () => {
           <span>Почта</span>
           <input
             type="email"
-            value={email}
+            value={user.email}
             name="email"
             onChange={handleChange}
           />
@@ -46,7 +42,7 @@ const LoginView = () => {
           <span>Пароль</span>
           <input
             type="password"
-            value={password}
+            value={user.password}
             name="password"
             onChange={handleChange}
           />
