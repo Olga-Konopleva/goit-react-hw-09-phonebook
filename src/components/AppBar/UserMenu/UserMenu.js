@@ -13,13 +13,17 @@ const Button = styled.button`
   color: #3f3f3f;
   width: 100px;
   height: 30px;
-  margin-left: 1em;
+  margin-left: 0;
   padding: 0.25em 1em;
   font-weight: 700;
 
   &:hover {
     background: LemonChiffon;
   }
+  @include for-size(tablet) {
+    margin-left: 1em;
+  }
+}
 `;
 
 const UserMenu = () => {
@@ -29,7 +33,7 @@ const UserMenu = () => {
 
   return (
     <div className={styles.userMenu}>
-      <p className={styles.user}>{email}</p>
+      <p className={styles.userName}>{email}</p>
       <Button type="button" onClick={onLogout}>
         Выйти
       </Button>

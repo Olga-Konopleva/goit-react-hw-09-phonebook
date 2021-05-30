@@ -7,7 +7,7 @@ const Navigation = () => {
   const isAutendicated = useSelector(getAutendicated);
 
   return (
-    <nav>
+    <nav className={styles.nav}>
       <NavLink
         className={styles.nav_link}
         activeClassName={styles.nav_linkActive}

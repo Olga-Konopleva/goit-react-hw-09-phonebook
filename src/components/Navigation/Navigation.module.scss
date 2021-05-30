@@ -1,14 +1,29 @@
+@import '../../styles/mixins';
+
+.nav {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  @include for-size(tablet) {
+    flex-direction: row;
+  }
+}
+
 .nav_link {
   text-decoration: none;
   font-weight: 700;
   font-size: 18px;
   color: black;
+  margin-bottom: 5px;
   &:not(:last-child) {
     margin-right: 15px;
   }
   &:hover,
   &:focus {
     text-decoration: underline;
+  }
+  @include for-size(tablet) {
+    margin-bottom: 0;
   }
 }
 

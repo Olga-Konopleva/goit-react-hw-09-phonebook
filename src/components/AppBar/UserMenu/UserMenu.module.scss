@@ -1,9 +1,20 @@
+@import '../../../styles/mixins';
+
 .userMenu {
   display: flex;
   align-items: center;
+  flex-direction: column;
+  @include for-size(tablet) {
+    flex-direction: row;
+  }
 }
 
-.user {
-  margin-right: 15px;
+.userName {
+  margin-right: 0;
   font-size: 18px;
+  margin-bottom: 5px;
+  margin-top: 0;
+  @include for-size(tablet) {
+    margin-right: 15px;
+  }
 }
