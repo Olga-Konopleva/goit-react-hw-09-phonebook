@@ -56,6 +56,8 @@ const RegisterView = () => {
             value={user.password}
             name="password"
             onChange={handleChange}
+            title="Пароль должен быть от 7 символов"
+            pattern="[0-9a-fA-F]{7,20}"
           />
         </label>
         <Button type="submit">Зарегистрироваться</Button>
